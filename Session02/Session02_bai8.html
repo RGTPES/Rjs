@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+  
+    const person = {
+  name: "John",
+  age: 25,
+  location: {
+    city: "Hanoi",
+    country: "Vietnam"
+  },
+  contact: {
+    email: "john@example.com",
+    phone: "0123456789"
+  },
+  job: {
+    title: "Developer",
+    company: "Tech Corp"
+  }
+};
+function displayUserInfo(user) {
+  const name = user.name || "unknown";
+  const age = user.age || "unknown";
+
+  const city = user.location?.city || "unknown";
+  const country = user.location?.country || "unknown";
+
+  const email = user.contact?.email || "unknown";
+  const phone = user.contact?.phone || "unknown";
+
+  const title = user.job?.title || "unknown";
+  const company = user.job?.company || "unknown";
+
+  return `${name} là ${title} làm tại ${company}, sống ở ${city}, ${country}. Năm nay ${name} ${age} tuổi. Bạn có thể liên hệ qua email ${email} hoặc số điện thoại ${phone}.`;
+}
+console.log(displayUserInfo(person));
+    </script>
+    
+</body>
+</html>

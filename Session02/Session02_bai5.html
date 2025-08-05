@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let phoneBooks =[];
+        const addContact = (name, phone, email) => {
+            phoneBooks.push({ name, phone, email });
+        };
+        const displayContact=() =>{
+            phoneBooks.forEach(contact => {
+                console.log(`Name: ${contact.name}, Phone: ${contact.phone}, Email: ${contact.email}`);
+            });
+
+        }
+    </script>
+</body>
+</html>

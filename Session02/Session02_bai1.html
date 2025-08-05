@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const arr = [1, 2, 3, 4, 5];
+
+    const sum = (arr) => {
+      let total = 0;
+      for (const value of arr) {
+        if (value % 2 === 0) {
+          total += value;
+        }
+      }
+      return total;
+    };
+
+    console.log("Sum:", sum(arr));
+    </script>
+</body>
+</html>

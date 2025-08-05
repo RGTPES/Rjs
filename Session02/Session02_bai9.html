@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const person = {
+            name: "Dev",
+            age: 20,
+            listMonhoc :[
+                {
+                    name: "Math",
+                    diem: 9
+                },
+                {
+                    name: "English",
+                    diem: 7.5
+                },
+                {
+                    name: "Physics",
+                    diem: 6
+                },
+                {
+                    name: "Literature",
+                    diem: 8.5
+                }
+            ]
+        }
+        const displayUserInfo = (user) => {
+            const name = user.name 
+            const age = user.age 
+            const averageScore = user.listMonhoc.reduce((acc, subject) => acc + subject.diem, 0) / user.listMonhoc.length;
+             let studentType = "";
+            if (averageScore >= 8.5) {
+                studentType = "Hoc sinh gioi";
+            } else if (averageScore >= 7) {
+                studentType = "Hoc sinh kha";
+            } else if (averageScore >= 5) {
+                studentType = "Hoc sinh trung binh";
+            } else {
+                studentType = "Hoc sinh yeu";
+            }
+            const bestSubject = user.listMonhoc.reduce((best, subject) => subject.diem > best.diem ? subject : best, user.listMonhoc[0]);
+            const worstSubject = user.listMonhoc.reduce((worst, subject) => subject.diem < worst.diem ? subject : worst, user.listMonhoc[0]);
+            return console.log(`${user.name} is ${age} years old.\n Average score is ${averageScore.toFixed(2)}-> ${studentType}\n The best subject is ${bestSubject.name} : ${bestSubject.diem}\n Weakest subject is ${worstSubject.name} : ${worstSubject.diem}`);
+        }
+        displayUserInfo(person);
+    </script>
+</body>
+</html>
