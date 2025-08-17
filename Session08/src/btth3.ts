@@ -36,6 +36,9 @@ abstract class Flight {
             return false;
         }
     }
+    getDetails() {
+        return `flightNumber: ${this.flightNumber},origin: ${this.origin} , destination: ${this.destination} , departure: ${this.departureTime} ,cap: ${this.capacity} , bookedSeats: ${this.bookedSeats}`
+    }
     abstract calculateBaggageFee(weight: number): number;
 
 
@@ -56,7 +59,7 @@ class Booking {
     flight: Flight;
     numberOfTickets: number;
     totalCost: number;
-    constructor( bookingId: number,passenger: Passenger,flight: Flight,numberOfTickets: number,totalCost: number){
+    constructor(bookingId: number, passenger: Passenger, flight: Flight, numberOfTickets: number, totalCost: number) {
         this.bookingId = bookingId;
         this.passenger = passenger;
         this.flight = flight;
@@ -64,25 +67,49 @@ class Booking {
         this.totalCost = totalCost;
 
     }
-    getBookingDetails():string{
-        return `ID: ${this.bookingId}, passenger: ${this.passenger}, flight: ${this.flight}, numberOfTickets: ${this.numberOfTickets},totalCost: ${this.totalCost}`;
+    getBookingDetails(): string {
+        return `ID: ${this.bookingId}, passenger: ${this.passenger.getDetails()}, flight: ${this.flight.getDetails()}, numberOfTickets: ${this.numberOfTickets},totalCost: ${this.totalCost}`;
 
     }
 
 
 }
-class GenericRepository<T>{
-    private items:T[] = [];
-    add(item:T):void{
+class GenericRepository<T> {
+    private items: T[] = [];
+    add(item: T): void {
         this.items.push(item);
     }
-    getAll():T[]{
-        this.items.forEach(a=>console.log(a));
+    getAll(): T[] {
+        this.items.forEach(a => console.log(a));
         return this.items;
-        
+
     }
-    find(predicate:(item:T)=>boolean):T|undefined{
+    findIndex(predicate: (item: T) => boolean): number {
+        return this.items.findIndex(predicate);
+    }
+    find(predicate: (item: T) => boolean): T | undefined {
         return this.items.find(predicate);
     }
-    
+    remove(predicate: (item: T) => boolean): void {
+        this.items = this.items.filter(item => !predicate(item));
+    }
+
+}
+class AirlineManager {
+    private flightRepo: GenericRepository<Flight>;
+    private passengerRepo: GenericRepository<Passenger>;
+    private bookingRepo: GenericRepository<Booking>;
+    constructor( flightRepo: GenericRepository<Flight>,passengerRepo: GenericRepository<Passenger>,bookingRepo: GenericRepository<Booking>){
+        this.flightRepo = flightRepo;
+        this.passengerRepo = passengerRepo;
+        this.bookingRepo = bookingRepo;
+    }
+    addFlight(flight:Flight):void{
+        this.flightRepo.add(flight);
+    }
+   addPassenger(name: string, passportNumber: string): void {
+    const passengerId = this.passengerRepo.getAll().length + 1; 
+    const passenger = new Passenger(passengerId, name, passportNumber);
+    this.passengerRepo.add(passenger);
+}
 }
